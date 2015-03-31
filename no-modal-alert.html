@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="jq.js"></script>
+</head>
+<body>
+<style>
+    .alert {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        background-color: #FFF;
+        top: 50%;
+        height: 100px;
+        margin-top: -50px;
+        left: 50%;
+        width: 200px;
+        margin-left: -100px;
+    }
+
+    .alert-mask {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 99;;
+        background-color: #000;
+        opacity: .5;
+        display: none;
+    }
+</style>
+
+<button id="js-btn">弹</button>
+
+<div id="js-alert" class="alert">提示</div>
+<div class="alert-mask"></div>
+
+<script>
+
+
+    function closeAlert() {
+        $("#js-alert").hide();
+        $(".alert-mask").hide();
+    }
+
+    $("#js-btn").click(function () {
+        $("#js-alert").show();
+        $(".alert-mask").show();
+    });
+
+    $(".alert-mask").click(function () {
+        closeAlert();
+    });
+
+</script>
+</body>
+</html>

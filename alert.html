@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="jq.js"></script>
+</head>
+<body>
+<style>
+    .alert {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        background-color: #aaa;
+
+        top: 50%;
+        height: 100px;
+        margin-top: -50px;
+
+        left: 50%;
+        width: 200px;
+        margin-left: -100px;
+    }
+</style>
+<div id="alert" class="alert"></div>
+<button id="btn">弹</button>
+<script>
+
+
+    $("#btn").click(function () {
+        document.getElementById('alert').style.display = 'block'
+        return false;
+    })
+
+    $(".alert").click(function (e) {
+        e.stopPropagation();
+    });
+
+    $(document).click(function () {
+        document.getElementById('alert').style.display = 'none'
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<title></title>
+    <script src="jq.js"></script>
+</head>
+<body>
+
+<style type="text/css" media="screen">
+    .click-menu .menu-body {
+        display: none;
+        position: absolute;
+        left: 0;
+        border: 1px solid #DDD;
+        background-color: #fafafa;
+    }
+    .click-menu.open .menu-body {
+        display: block;
+    }
+</style>
+<div class="click-menu">
+    <a href="javascript:;" title="">menu</a>
+    <div class="menu-body">
+        <div> content</div>
+        <div> content</div>
+        <div> content</div>
+    </div>
+</div>
+<script>
+
+    $(".click-menu > a").click(function () {
+        $(this).parent().toggleClass("open")
+    });
+
+    $(".click-menu").click(function (e) {
+        //仅阻止冒泡 别阻止默认行为（如菜单里的超链接跳转）
+        //e.preventDefault(); //阻止默认行为
+        e.stopPropagation(); //阻止冒泡
+    });
+
+    $(document).click(function () {
+        $(".click-menu").removeClass("open");
+    });
+</script>
+</body>
+</html>

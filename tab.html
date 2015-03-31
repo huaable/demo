@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="jq.js"></script>
+</head>
+<body>
+<style>
+
+
+    ul, li {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .tab {
+        border: 1px solid #DDD;
+    }
+
+    .tab .head {
+        overflow: hidden;
+        zoom: 1;
+    }
+
+    .tab .head li {
+        float: left;
+    }
+    .tab .head li.on {
+        color: red;
+    }
+
+    .tab .body li {
+        display: none;
+    }
+
+    .tab .body li.on {
+        display: block;
+    }
+</style>
+<div class="tab">
+    <ul class="head">
+        <li class="on">选项1</li>
+        <li>选项2</li>
+        <li>选项3</li>
+        <li>选项4</li>
+    </ul>
+    <ul class="body">
+        <li class="on">内容1</li>
+        <li>内容2</li>
+        <li>内容3</li>
+        <li>内容4</li>
+    </ul>
+</div>
+
+<script>
+    $(".tab .head li").mouseover(function () {
+        var index = $(this).index();
+        $(this).addClass("on").siblings().removeClass("on");
+        $(".tab .body li").eq(index).addClass("on").siblings().removeClass("on");
+    })
+</script>
+
+</body>
+</html>
