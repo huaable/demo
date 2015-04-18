@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<title></title>
+    <script src="jq.js"></script>
+</head>
+<body>
+<form action="" id="form">
+
+    <div>
+        <input type="text" name="input"/>
+    </div>
+    <div>
+        <input type="checkbox" name="checkbox" value="1"/> 复选1
+        <input type="checkbox" name="checkbox" value="2"/> 复选2
+    </div>
+    <div>
+        <textarea name="textarea" cols="30" rows="10"></textarea>
+    </div>
+    <div>
+        <select name="select">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+    </div>
+    <div>
+        <input type="submit" value="提交"/>
+    </div>
+</form>
+<script>
+    $("#form").submit(function(){
+
+        //ajax验证
+
+        //通过后提交数据
+        var formData = $("#form").serialize();
+        alert(formData);
+
+//        $.ajax({
+//            type: "POST",
+//            url: "",
+//            data: formData,
+//            dataType: "json",
+//            error: function () {
+//
+//            },
+//            success: function (response) {
+//
+//            },
+//            complete: function () {
+//
+//            }
+//        });
+
+        return false;
+    });
+</script>
+</body>
+</html>
