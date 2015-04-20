@@ -8,6 +8,10 @@
 <body>
 
 <style type="text/css" media="screen">
+    .click-menu {
+        float: left;
+        position: relative;
+    }
     .click-menu .menu-body {
         display: none;
         position: absolute;
@@ -27,9 +31,18 @@
         <div> content</div>
     </div>
 </div>
+<div class="click-menu">
+    <a href="javascript:;" title="">menu</a>
+    <div class="menu-body">
+        <div> content</div>
+        <div> content</div>
+        <div> content</div>
+    </div>
+</div>
 <script>
 
     $(".click-menu > a").click(function () {
+        $(".click-menu").removeClass("open")
         $(this).parent().toggleClass("open")
     });
 
