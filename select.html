@@ -1,0 +1,75 @@
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<style type="text/css" media="screen">
+    .picker {
+        position: relative;
+        width: auto;
+        display: inline-block;
+        margin: 0 0 2px 1.2%;
+        overflow: hidden;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -ms-border-radius: 4px;
+        -o-border-radius: 4px;
+        border-radius: 4px;
+        font-family: "Open Sans";
+        font-weight: 600;
+        height: auto;
+        background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #f2f2f2));
+        background-image: -webkit-linear-gradient(#ffffff, #f2f2f2);
+        background-image: -moz-linear-gradient(#ffffff, #f2f2f2);
+        background-image: -o-linear-gradient(#ffffff, #f2f2f2);
+        background-image: linear-gradient(#ffffff, #f2f2f2);
+    }
+
+    .picker select {
+        position: relative;
+        display: block;
+        min-width: 100%;
+        /*width: 120%;*/
+        height: 34px;
+        padding: 6px 30px 6px 15px;
+        color: #555555;
+        border: none;
+        background: transparent;
+        outline: none;
+        -webkit-appearance: none;
+        z-index: 99;
+        cursor: pointer;
+        font-size: 16px;
+        -moz-appearance: none;
+        text-indent: 0.01px;
+        text-overflow: '';
+    }
+
+    .picker .arrow {
+        /*content: "";*/
+        position: absolute;
+        right: 8%;
+        top: 50%;
+        z-index: 0;
+        color: #999;
+        width: 0;
+        margin-top: -2px;
+        height: 0;
+        border-top: 6px solid;
+        border-right: 6px solid transparent;
+        border-left: 6px solid transparent;
+    }
+</style>
+
+<div class="picker">
+    <select name="">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">1123411234</option>
+    </select>
+    <i class="arrow"></i>
+</div>
+</body>
+</html>
