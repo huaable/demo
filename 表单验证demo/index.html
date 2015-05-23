@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+<style>
+    #form .form-group {
+        margin-bottom: 10px;
+    }
+
+    #form .notice {
+        color: gray;
+    }
+
+    #form .error {
+        color: red;
+    }
+
+    #form .pass-strong span {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background-color: #EEE;
+    }
+
+    #form .pass-strong .active {
+        background-color: red;
+    }
+
+</style>
+<form action="" id="form">
+    <div class="form-group">
+        <input id="email" type="text" name="email"/>
+
+        <span class="tip">
+
+        </span>
+
+    </div>
+    <div class="form-group">
+        <input id="pass" type="password" name="pass"/>
+
+        <span class="tip">
+
+        </span>
+    </div>
+    <div class="form-group">
+        <div class="pass-strong">
+            <span class="low"></span>
+            <span class="middle"></span>
+            <span class="height"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit">注册</button>
+    </div>
+</form>
+<script>
+
+    //邮箱验证
+    function isEmail(value) {
+        return /^[a-zA-Z]\w+@\w+\.\w+$/.test(value);
+    }
+
+    //密码强度验证
+    function checkPassStrong(pass) {
+        var modes = 0;
+        if (pass.length < 6) {
+            return modes;
+        }
+        if (/\d/.test(pass)) {
+            //数字
+            modes++;
+        }
+        if (/[a-z]/.test(pass)) {
+            //小写
+            modes++;
+        }
+        if (/[A-Z]/.test(pass)) {
+            //大写
+            modes++;
+        }
+        if (/\W/.test(pass)) {
+            //特殊字符
+            modes++;
+        }
+
+        //强度总分
+        return modes;
+    }
+
+    var oForm = $("#form");
+    var oEmail = $("#email");
+    var oPass = $("#pass");
+    var oPassStrong = oForm.find(".pass-strong");
+
+    /**
+     * 用户名验证
+     */
+
+    oEmail.on("focus", function () {
+        oEmail.siblings(".tip").html("<span class='notice'>您的常用邮箱</span>");
+    });
+
+    oEmail.on("blur", function () {
+        oEmail.siblings(".tip").html("");
+        if (this.value.length < 1) {
+            oEmail.siblings(".tip").html("<span class='error'>请输入常用邮箱</span>");
+            return;
+        }
+        if (!isEmail(this.value)) {
+            oEmail.siblings(".tip").html("<span class='error'>请输入正确的邮箱地址</span>");
+        }
+    });
+
+    //用户名注册检查
+    oEmail.on("keyup", function () {
+        if (!isEmail(this.value)) {
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "",
+            data: {},
+            dataType: "json",
+            error: function () {
+
+            },
+            success: function (response) {
+                if (response.status == 1) {
+                    //可以注册提示
+                    //不能注册提示
+                    $(this).next(".oerror").text(response.msg);
+                }
+            },
+            complete: function () {
+
+            }
+        });
+
+    })
+
+
+    /**
+     * 密码验证
+     */
+    oPass.on("focus", function () {
+        oPass.siblings(".tip").html("<span class='notice'>请输入6-16位数字、字母或常用符号，字母区分大小写</span>");
+    });
+
+    //密码规则检查
+    oPass.on("keyup blur", function () {
+        oPass.siblings(".tip").html("");
+        var pass = this.value;
+
+        if (pass.length < 1) {
+            oPass.siblings(".tip").html("<span class='error'>请输入密码</span>");
+            return;
+        }
+        if (pass.length < 6 || pass.length > 20) {
+            oPass.siblings(".tip").html("<span class='error'>请输入6-16位数字、字母或常用符号，字母区分大小写</span>");
+        }
+    });
+
+    //密码强度验证
+    oPass.on("keyup", function () {
+        oPassStrong.find("span").removeClass("active");
+        var pass = this.value;
+        if (pass.length < 6 || pass.length > 20) {
+            return;
+        }
+        var strongLevel = checkPassStrong(pass);
+        if (strongLevel == 1) {
+            oPassStrong.find(".low").addClass("active");
+        }
+        if (strongLevel == 2) {
+            oPassStrong.find(".low").addClass("active");
+            oPassStrong.find(".middle").addClass("active");
+        }
+        if (strongLevel >= 3) {
+            oPassStrong.find(".low").addClass("active");
+            oPassStrong.find(".middle").addClass("active");
+            oPassStrong.find(".height").addClass("active");
+        }
+    });
+
+    /**
+     * 表单提交
+     */
+    $("#form").submit(function () {
+
+        var passValidate = true;
+        //检查表单
+        if (!isEmail(oEmail.val())) {
+            passValidate = false;
+            oEmail.siblings(".tip").html("<span class='error'>请输入正确的邮箱地址</span>");
+        }
+        if (oPass.val().length < 6 || oPass.val().length > 20) {
+            passValidate = false;
+            oPass.siblings(".tip").html("<span class='error'>请输入6-16位数字、字母或常用符号，字母区分大小写</span>");
+        }
+
+        //有表单没通过验证
+        if (passValidate == false) {
+            return false;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "",
+            data: {},
+            dataType: "json",
+            error: function () {
+
+            },
+            success: function (response) {
+
+            },
+            complete: function () {
+
+            }
+        });
+        return false;
+    })
+
+</script>
+</body>
+</html>

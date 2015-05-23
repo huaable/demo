@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>jQuery实现当拉动滚动条到底部加载数据</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    动态加载数据<br/>动态加载数据<br/>动态加载数据<br/>动态加载数据<br/>动态加载数据<br/>
+    动态加载数据<br/>动态加载数据<br/>动态加载数据<br/>动态加载数据<br/>动态加载数据<br/>
+    动态加载数据<br/>动态加载数据<br/>动态加载数据<br/>动态加载数据<br/>动态加载数据<br/>
+</div>
+<button id="load-btn">加载更多</button>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+<script type="text/javascript">
+
+    (function () {
+        var totalHeight = 0;     //定义一个总的高度变量
+        var isLoading = false;
+        var loadData = function () {
+            //浏览器的高度加上滚动条的高度
+            totalHeight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
+
+            //当文档的高度小于或者等于总的高度的时候，开始动态加载数据
+            var condition = $(document).height() <= totalHeight;
+            //var condition = $(document).height() <= totalHeight + 300;
+            if (condition) {
+                if (isLoading == true) {
+                    return;
+                }
+                isLoading = true;
+
+                //ajax
+                setTimeout(function () {
+                    //加载数据
+                    $("#container").append("我是新加载出来的数据<br/>我是新加载出来的数据<br/>我是新加载出来的数据<br/>");
+                    isLoading = false;
+                }, 200);
+            }
+        }
+
+        $(window).scroll(function () {
+            console.log("滚动条到顶部的垂直高度: " + $(document).scrollTop());
+            console.log("页面的文档高度 ：" + $(document).height());
+            console.log('浏览器的高度：' + $(window).height());
+            loadData();
+        });
+
+        $("#load-btn").click(function () {
+            loadData();
+        })
+
+    })()
+
+</script>
+</body>
+</html>

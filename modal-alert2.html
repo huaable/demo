@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+<style>
+    #alert {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        background-color: #FFF;
+        top: 50%;
+        height: 100px;
+        margin-top: -50px;
+        left: 50%;
+        width: 200px;
+        margin-left: -100px;
+    }
+
+    #alert-mask {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 99;;
+        background-color: #000;
+        opacity: .5;
+        display: none;
+    }
+</style>
+
+<button  onclick="showAlert()">弹</button>
+
+<div id="alert">
+    <span href="javascript:;" onclick="closeAlert()" style="color: red;">x</span>
+</div>
+<div id="alert-mask"></div>
+
+<script>
+
+    var getDom = function(id){
+        return document.getElementById(id);
+    };
+
+    function showAlert(){
+        getDom("alert").style.display="block";
+        getDom("alert-mask").style.display="block";
+    }
+
+    function closeAlert() {
+        getDom("alert").style.display="none";
+        getDom("alert-mask").style.display="none";
+    }
+</script>
+</body>
+</html>
