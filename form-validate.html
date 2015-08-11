@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title></title>
-    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="jq.js"></script>
 </head>
 <body>
 <style>
@@ -62,7 +62,7 @@
 
     //邮箱验证
     function isEmail(value) {
-        return /^[a-zA-Z]\w+@\w+\.\w+$/.test(value);
+        return /^[a-zA-Z0-9]\w+@\w+\.\w+$/.test(value);
     }
 
     //密码强度验证
@@ -209,6 +209,8 @@
             return false;
         }
 
+        alert('ajax提交中')
+        /*
         $.ajax({
             type: "POST",
             url: "",
@@ -224,6 +226,7 @@
 
             }
         });
+        */
         return false;
     })
 

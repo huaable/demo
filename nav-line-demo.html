@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="jq.js"></script>
+</head>
+<body>
+<style>
+    .menu {
+        padding: 0;
+        margin: 0;
+        position: relative;
+        overflow: hidden;
+        zoom: 1;
+    }
+
+    .menu li {
+        padding: 10px;
+        float: left;
+        background-color: #EEE;
+        cursor: pointer;
+        list-style: none;
+    }
+
+    .menu .menu-line {
+        width: 0px;
+        background-color: blue;
+        height: 2px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+    }
+</style>
+<ul class="menu" onmouseout="moveBack()">
+    <li onmouseover="moveTo(this)">导航</li>
+    <li class="active" onmouseover="moveTo(this)">导航导航</li>
+    <li onmouseover="moveTo(this)">导航</li>
+    <li onmouseover="moveTo(this)">导航</li>
+    <div class="menu-line"></div>
+</ul>
+<script>
+
+
+    var line = $(".menu .menu-line");
+    var activeLi = $(".menu li.active")
+
+    //初始化选中
+    init(activeLi);
+    function init(o) {
+        var oLi = $(o);
+        var w = oLi.innerWidth();
+        var left = oLi.position().left;
+        line.css({
+            width: w,
+            left: left
+        })
+    }
+
+    //移动动画定位
+    function moveTo(o) {
+        var oLi = $(o);
+        var w = oLi.innerWidth();
+        var left = oLi.position().left;
+        line.stop(true).animate({
+            width: w,
+            left: left
+        }, 100);
+    }
+
+    function moveBack() {
+        moveTo(activeLi);
+    }
+
+</script>
+</body>
+</html>

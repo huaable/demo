@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+<script src="jq.js"></script>
+<style>
+
+    .picker {
+        position: relative;
+        display: inline-block;
+        font-size: 22px;
+        color: #000;
+        font-weight: 600;
+        line-height: 1;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        border: 1px solid #DDD;
+    }
+
+    .picker .arrow {
+        position: absolute;
+        top: 22px;
+        right: 15px;
+        bottom: 0;
+        height: 0;
+        width: 0;
+        border-top: 10px solid #000;
+        border-right: 10px solid #fff;
+        border-bottom: 10px solid #fff;
+        border-left: 10px solid #fff
+    }
+
+    .picker .picker-title {
+        background: #fff;
+        padding: 15px;
+        padding-right: 40px;
+        cursor: pointer;
+        white-space: nowrap
+    }
+
+    .picker .picker-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        min-width: 100%;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        left: -1px;
+        z-index: 100;
+    }
+
+    .picker .picker-menu {
+        max-height: 260px;
+        overflow: auto;
+        border: 1px solid #ddd
+    }
+
+    .picker .picker-menu li {
+        background: #fff;
+        padding: 15px;
+        border-bottom: 1px solid #efefef;
+        cursor: pointer;
+        white-space: nowrap;
+        text-align: left
+    }
+
+    .picker .picker-menu li:hover {
+        background: #efefef
+    }
+
+    .picker.open .arrow {
+        top: 12px;
+        border-top: 10px solid #fff;
+        border-bottom: 10px solid #000
+    }
+
+    .picker.open .picker-menu {
+        display: block
+    }
+</style>
+<div>
+
+    <div class="picker">
+        <input id="demo-1" type="hidden" name="" value="0"/>
+
+        <div class="picker-title">2014款 标志RCZ 1.6T自动时尚型（1.6L手自一体）</div>
+        <ul class="picker-menu">
+            <li data-value="1">2014款 标志RCZ 1.6T自动时尚型（1.6L手自一体）1</li>
+            <li data-value="2">2014款 自动时尚型（1.6L手自一体）2</li>
+            <li data-value="3">2014款 标志RCZ 1.6（1.6L手自一体）3</li>
+            <li data-value="4">2014款 标志RCZ 1.6T自动时尚型（1.6L手自一体）4</li>
+            <li data-value="5">2014款 RCZ 1.6T自动时尚型（1.6L手自一体）5</li>
+        </ul>
+        <span class="arrow"></span>
+    </div>
+</div>
+<div>
+
+    <div class="picker">
+        <input id="demo-2" type="hidden" name="" value="0"/>
+
+        <div class="picker-title">2014款 标志RCZ 1.6T自动时尚型（1.6L手自一体）</div>
+        <ul class="picker-menu">
+            <li data-value="1">2014款 标志RCZ 1.6T自动时尚型（1.6L手自一体）1</li>
+            <li data-value="2">2014款 自动时尚型（1.6L手自一体）2</li>
+            <li data-value="3">2014款 标志RCZ 1.6（1.6L手自一体）3</li>
+            <li data-value="4">2014款 标志RCZ 1.6T自动时尚型（1.6L手自一体）4</li>
+            <li data-value="5">2014款 RCZ 1.6T自动时尚型（1.6L手自一体）5</li>
+        </ul>
+        <span class="arrow"></span>
+    </div>
+</div>
+
+<script>
+    var picker = $(".picker");
+    $(".picker-title", picker).click(function (e) {
+        var _picker = $(this).parent(".picker")
+        $(".picker").not(_picker).removeClass("open")
+        _picker.toggleClass("open");
+        e.stopPropagation();
+
+    });
+    $(".picker-menu li", picker).click(function (e) {
+        var _picker = $(this).closest(".picker");
+        var value = $(this).data("value");
+        var oldValue = $("input", _picker).val();
+
+        $("input", _picker).val(value);
+
+        if (oldValue != value) {
+            //_picker.trigger("change",{value:value});
+            $("input", _picker).trigger("change", {value: value});
+        }
+
+        $(".picker-title", _picker).html($(this).html());
+        _picker.toggleClass("open");
+        e.stopPropagation();
+    });
+    $(document).on("click", function () {
+        picker.removeClass("open");
+    })
+
+
+    ///////////
+
+    $("#demo-1").on("change", function () {
+        console.info(this)
+        alert("demo-1:" + this.value);
+    })
+
+    $("#demo-2").on("change", function () {
+        alert("demo-2:" + this.value);
+    })
+
+
+</script>
+</body>
+</html>
