@@ -1,0 +1,27 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+
+<div id="outDiv">
+<div id="middleDiv">
+<div id="inDiv">请在此点击鼠标。</div>
+</div>
+</div>
+
+<div id="info"></div>
+<script>
+
+var outDiv = document.getElementById("outDiv");
+var middleDiv = document.getElementById("middleDiv");
+var inDiv = document.getElementById("inDiv");
+var info = document.getElementById("info");
+
+outDiv.addEventListener("click", function () { info.innerHTML += "outDiv" + "<br>"; }, false);
+middleDiv.addEventListener("click", function () { info.innerHTML += "middleDiv" + "<br>"; }, false);
+inDiv.addEventListener("click", function () { info.innerHTML += "inDiv" + "<br>"; }, false);
+</script>
+</body>
+</html>

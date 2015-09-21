@@ -1,0 +1,28 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<div id="box" style="width:200px;height:200px;">
+		
+	</div>
+<script>
+	function changeStyle(attr, value){
+	    this.style[attr] = value;
+	}
+
+	//1. call 改变this指向直接调用
+	var box = document.getElementById('box');
+	changeStyle.call(box, "background-color", "red");
+
+	//2. apply 第二个参数可以是 arguments 类数组的形式（可变长度的参数形式）
+	changeStyle.apply(box, ["border-radius", "60px"]);
+
+	//3. 直接给box对象 或 是其prototype原型链 增加方法
+	box.changeStyle = changeStyle;
+	box.changeStyle("border","10px solid green");
+
+</script>
+</body>
+</html>
