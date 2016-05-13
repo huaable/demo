@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<script src="tween.js"></script>
+<script src="jquery.js"></script>
+<body>
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    ul li {
+        display: block;
+        width: 100px;
+        height: 100px;
+        margin: 5px;
+        background: #eee;
+        float: left;
+        text-align: center;
+        color: #fff;
+        font-size: 30px;
+        line-height: 100px;
+    }
+
+    ul li.active {
+        background: red;
+    }
+</style>
+<ul>
+    <li>0</li>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+    <li>10</li>
+    <li>11</li>
+    <li>12</li>
+    <li>13</li>
+    <li>14</li>
+    <li>15</li>
+    <li>16</li>
+    <li>17</li>
+    <li>18</li>
+    <li>19</li>
+</ul>
+
+<script>
+    window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+
+    // 0 1 2 3 4 5 ...
+    function runToIndex(index, complete) {
+        var len = $("ul li").size();
+        var start, alter, curTime, dur;
+
+        var runIndex = 0;
+        //缓动函数图的几个变量
+        start = 0;//初始位置
+        alter = index + len * 22;//指定索引 +len 倍数 => 为速度运行
+        curTime = 0;//时间轴开始
+        dur = 1000;//时间轴结束
+        requestAnimationFrame(run);
+        function run() {
+            curTime++;
+            var val = Tween.Quad.easeInOut(start, alter, curTime, dur);
+            runIndex = Math.floor(val % len);
+            $("ul li:eq(" + (runIndex) + ")").addClass("active").siblings().removeClass("active");
+            if (curTime < dur) {
+                requestAnimationFrame(run);
+            } else {
+                complete(index)
+            }
+        }
+    }
+
+    runToIndex(6, function () {
+        //过一小一会儿 弹出 恭喜
+        setTimeout(function () {
+            alert("恭喜!");
+        }, 500)
+    });
+
+</script>
+</body>
+</html>
